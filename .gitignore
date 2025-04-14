@@ -1,0 +1,16 @@
+test
+bin
+build
+dist
+.venv
+.vscode
+__pycache__
+*.pyc
+*.spec
+*.egg-info
+*.egg
+*.log
+*.dll
+*.exp
+*.lib
+*.obj
