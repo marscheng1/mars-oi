@@ -1,6 +1,8 @@
 import sys
 from subprocess import call, PIPE
 
+from config import check_DefaultCheckerExec
+
 
 class Checker:
     def check(self, input_file: str, output_file: str, ans_file: str) -> bool:
@@ -18,8 +20,18 @@ class FcChecker(Checker):
         call(["fc", "/A", "/W", "/N", output_file, ans_file], stdout=sys.stdout, stderr=sys.stderr)
 
 
+class CheckChecker(Checker):
+    def check(self, input_file, output_file, ans_file):
+        return call([check_DefaultCheckerExec, input_file, output_file, ans_file], stdout=PIPE) == 0
+
+    def show_diff(self, input_file, output_file, ans_file):
+        call([check_DefaultCheckerExec, input_file, output_file, ans_file],
+             stdout=sys.stdout, stderr=sys.stderr)
+
+
 _checkers = {
-    "fc": FcChecker()
+    "fc": FcChecker(),
+    "check": CheckChecker()
 }
 
 

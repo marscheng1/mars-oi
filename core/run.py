@@ -16,7 +16,7 @@ class RunInfoType(Structure):
 if getattr(sys, 'frozen', False):
     _dll_path = os.path.join(os.path.dirname(os.path.abspath(sys.executable)), 'core.dll')
 elif __file__:
-    _dll_path = os.path.join(os.path.dirname(__file__), 'core.dll')
+    _dll_path = os.path.join("bin", 'core.dll')
 _core_dll = CDLL(_dll_path)
 _core_dll.run.argtypes = [
     c_char_p,  # exec

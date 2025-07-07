@@ -10,7 +10,6 @@ def do_check(args):
     exec = os.path.join(compile_BinDir, args.exec + ".exe")
     call(["g++", "-o", check_GenBin, args.gen + ".cpp"])
     call(["g++", "-o", check_SolBin, args.sol + ".cpp"])
-
     count = 1
     while True:
         try:

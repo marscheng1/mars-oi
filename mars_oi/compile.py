@@ -1,7 +1,7 @@
 import os
 from subprocess import call
 
-from config import compile_ProcessFile, compile_LastCompile, compile_CC, compile_Flags
+from config import compile_ProcessFile, compile_CC, compile_Flags, set_last_compile
 
 
 def do_compile(args):
@@ -15,5 +15,4 @@ def do_compile(args):
                 os.path.dirname(args.source)), exist_ok=True)
     call([compile_CC] + compile_Flags +
          [compile_ProcessFile, "-o", os.path.join(os.getcwd(), "bin", args.source)])
-    with open(compile_LastCompile, "w") as f:
-        f.write(args.source)
+    set_last_compile(args.source)

@@ -6,7 +6,7 @@ compile_BinDir = os.path.join(os.getcwd(), "bin")
 compile_ProcessFile = os.path.join(compile_BinDir, "process.cpp")
 compile_LastCompile = os.path.join(compile_BinDir, "last_compile.txt")
 compile_Flags = [
-    "-x", "c++", "-std=c++14", "-Wl,--stack=536870912",
+    "-x", "c++", "-std=c++17", "-Wl,--stack=536870912",
     "-g", "-DONLINE_JUDGE", "-Wall", "-fno-asm", "-lm",
     "-march=native", "-Wno-unused-value"
 ]
@@ -24,6 +24,8 @@ check_AnsFile = os.path.join(test_TestDir, "answer.txt")
 run_DefaultInput = os.path.join(test_TestDir, "input.txt")
 run_DefaultOutput = os.path.join(test_TestDir, "output.txt")
 
+check_DefaultCheckerExec = os.path.join(os.getcwd(), "test", "checker.exe")
+
 
 def get_last_compile():
     if os.path.exists(compile_LastCompile):
@@ -31,3 +33,8 @@ def get_last_compile():
             return f.read()
     else:
         return None
+
+
+def set_last_compile(file):
+    with open(compile_LastCompile, "w") as f:
+        f.write(file)

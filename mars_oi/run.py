@@ -3,7 +3,7 @@ from colorama import Fore
 from subprocess import Popen, PIPE, TimeoutExpired
 from sys import stdout
 
-from config import args_NoInput, run_DefaultInput, run_DefaultOutput, compile_BinDir
+from config import args_NoInput, run_DefaultInput, run_DefaultOutput, compile_BinDir, test_TestDir
 from core import run
 
 
@@ -45,8 +45,10 @@ def run_console(exec: str, input_file: str, time_limit_ms: int):
 
 def do_run(args):
     exec = os.path.join(compile_BinDir, args.exec + ".exe")
-    input_file = run_DefaultInput if args.input is None or args.input == args_NoInput else args.input
-    output_file = run_DefaultOutput if args.output is None or args.output == args_NoInput else args.output
+    input_file = run_DefaultInput if args.input is None or args.input == args_NoInput \
+        else os.path.join(test_TestDir, args.input + ".in")
+    output_file = run_DefaultOutput if args.output is None or args.output == args_NoInput \
+        else os.path.join(test_TestDir, args.output + ".out")
 
     if args.input == args_NoInput:
         read_input(input_file)
